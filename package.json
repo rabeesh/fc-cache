@@ -1,0 +1,18 @@
+{
+  "name": "fc-coding-challenge",
+  "version": "1.0.0",
+  "description": "FC coding for Cache API",
+  "main": "src/index.js",
+  "author": "rab",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon ./src --ignore tests/ localhost 3000"
+  },
+  "devDependencies": {
+    "nodemon": "1.17.2"
+  },
+  "dependencies": {
+    "express": "4.16.3",
+    "morgan": "1.9.0"
+  }
+}
