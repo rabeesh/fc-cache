@@ -12,7 +12,7 @@ module.exports = async (config) => {
         // Exit application on error
         mongoose.connection.on('error', reject);
 
-        mongoose.connection.on('connected', () => {
+        mongoose.connection.once('open', () => {
             resolve(mongoose.connection);
         });
 

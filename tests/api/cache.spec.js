@@ -20,10 +20,23 @@ describe('api end points', () => {
         );
     });
 
-    describe('all cached data', () => {
+    describe('Cached data', () => {
         it('Should returns all stored keys in the cache', () => {
             return expect({
                 url: '/cache'
+            }, 'to yield a response of', {
+                statusCode: 200,
+                body: []
+            });
+        });
+
+        it('Should create data with key', () => {
+            return expect({
+                url: 'POST /cache',
+                body: {
+                    data: 11,
+                    description: 'balaa'
+                }
             }, 'to yield a response of', {
                 statusCode: 200,
                 body: []
