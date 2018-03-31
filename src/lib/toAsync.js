@@ -1,6 +1,6 @@
-// wrap into express handler into async/await
 const httpErrors = require('http-errors');
 
+// wrap into express handler into async/await
 module.exports = handler => {
     return (req, res, next) => {
         handler(req, res, next).catch(err => {
