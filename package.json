@@ -9,9 +9,13 @@
     "start": "nodemon ./src --ignore tests/ localhost 3000",
     "start:dev": "cross-env NODE_ENV=development npm run start",
     "test": "cross-env NODE_ENV=test mocha --recursive tests/",
-    "prettier": "prettier --single-quote --tab-width 4 --trailing-comma es5 --write src/**/*.js"
+    "prettier": "prettier --single-quote --tab-width 4 --trailing-comma es5 --write src/**/*.js",
+    "lint": "eslint src/**/*.js"
   },
   "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.10.0",
     "mocha": "5.0.5",
     "nodemon": "1.17.2",
     "prettier": "1.11.1",

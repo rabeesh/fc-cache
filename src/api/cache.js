@@ -13,7 +13,7 @@ module.exports = (logger, cacheManager) => {
      */
     app.get(
         '/:key',
-        toAsync(async (req, res, next) => {
+        toAsync(async (req, res) => {
             const { key } = req.params;
             if (!key) {
                 throw new httpErrors.BadRequest();
@@ -43,7 +43,7 @@ module.exports = (logger, cacheManager) => {
      */
     app.get(
         '/',
-        toAsync(async (req, res, next) => {
+        toAsync(async (req, res) => {
             const all = await cacheManager.getAllCache();
             res.send(all);
         })
@@ -55,7 +55,7 @@ module.exports = (logger, cacheManager) => {
      */
     app.post(
         '/',
-        toAsync(async (req, res, next) => {
+        toAsync(async (req, res) => {
             const data = req.body;
             if (!data) {
                 throw new httpErrors.BadRequest();
@@ -72,7 +72,7 @@ module.exports = (logger, cacheManager) => {
      */
     app.put(
         '/:key',
-        toAsync(async (req, res, next) => {
+        toAsync(async (req, res) => {
             const { key } = req.params;
             const data = req.body;
             if (!key || !data || Object.keys(data).length === 0) {
@@ -101,7 +101,7 @@ module.exports = (logger, cacheManager) => {
      */
     app.delete(
         '/',
-        toAsync(async (req, res, next) => {
+        toAsync(async (req, res) => {
             await cacheManager.remove();
             res.sendStatus(204);
         })
@@ -113,7 +113,7 @@ module.exports = (logger, cacheManager) => {
      */
     app.delete(
         '/:key',
-        toAsync(async (req, res, next) => {
+        toAsync(async (req, res) => {
             const { key } = req.params;
             if (!key) {
                 throw new httpErrors.BadRequest();
