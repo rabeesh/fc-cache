@@ -12,5 +12,7 @@ module.exports = {
     maximumCacheLimit: process.env.MAXIMUM_CACHE_LIMIT || 10,
     // in minutes
     expirationTime: process.env.EXPIRATION_TIME || 15,
-    mongoUri: process.env.MONGO_URI || 'mongodb://localhost:27017/fc-cache'
+    mongoUri: process.env.MONGO_URI || 'mongodb://localhost:27017/fc-cache',
+    mongoTestUri: process.env.MONGO_TEST_URI || 'mongodb://localhost:27017/test-fc-cache'
+
 }

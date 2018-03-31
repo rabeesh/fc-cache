@@ -10,8 +10,6 @@
     "start:dev": "cross-env NODE_ENV=development npm run start",
     "test": "cross-env NODE_ENV=test mocha --recursive tests/",
     "prettier": "prettier --single-quote --tab-width 4 --trailing-comma es5 --write src/**/*.js"
-
-
   },
   "devDependencies": {
     "mocha": "5.0.5",

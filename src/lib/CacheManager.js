@@ -41,7 +41,7 @@ class CacheManager {
      *
      * @returns {Object} cache
      */
-    async createCache(data = {}) {
+    async createCache(data = null) {
         const CacheData = this.model();
         const cache = new CacheData({
             data: data,
@@ -116,13 +116,14 @@ class CacheManager {
 
     /**
      * Clean date by about to expire and data is null
-     * And passed over 2/3 of time
+     * And passed over 2/3 of time and 15% of limit
      *
-     * @requires { count }, if -1 it's in limit
+     * @requires { mixed }, if false it's in limit
+     * other wise returns likelyDeletableCache
      */
     async cleanMaximumLimit({ expirationTime, cacheMaximumLimit }) {
-        const totalCacheCount = await cacheManager.countOfCache();
-        if (totalCacheCount < cacheMaximumLimit) {
+        const totalCacheCount = await this.countOfCache();
+        if (totalCacheCount <= cacheMaximumLimit) {
             return false;
         }
 
@@ -131,10 +132,10 @@ class CacheManager {
         const likelyDeletableCache = await this.model()
             // (Date.now() - created_time) > 2/3 of ttl
             .where('created_at')
-            .gt(expireTime)
+            .lte(expireTime)
             .where('data')
             .equals(null)
-            .limit(30)
+            .limit(Math.ceil(cacheMaximumLimit * 0.15))
             .sort('-createdAt')
             .exec();
 
