@@ -15,7 +15,7 @@ const app = express();
         dbConn = await require('./lib/conMongo')(config);
     } catch (err) {
         logger.error(`MongoDB connection error: ${err}`);
-        process.exit(-1);
+        throw err;
     }
 
     app.use(morgan('combined'));
@@ -30,10 +30,11 @@ const app = express();
     app.use('/cache', require('./api/cache')(config, logger, cacheManager));
 
     app.listen(3000, () => {
-        console.log('App listening on port 3000')
+        logger.log('App listening on port 3000')
     });
 })().catch(err => {
-    console.log(err);
+    logger.error(err);
+    process.exit(-1);
 });
 
 module.exports = app;

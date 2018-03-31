@@ -7,9 +7,12 @@ class CacheManager {
     constructor(dbConn) {
         this.dbConn = dbConn;
         this.schema = mongoose.Schema({
-            description: 'string',
+            data: 'object',
             key: 'string',
-            created: ''
+        }, {
+            timestamps: {
+                createdAt: 'created_at'
+            }
         });
     }
 
@@ -33,10 +36,10 @@ class CacheManager {
      *
      * @returns {Object} cache
      */
-    async createCache(description = '') {
+    async createCache(data = {}) {
         const CacheData = this.dbConn.model('Cache', this.schema);
         const cache = new CacheData({
-            description: description,
+            data: data,
             key: uuidv4()
         });
         await cache.save();

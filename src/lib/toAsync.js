@@ -5,11 +5,10 @@ module.exports = (handler) => {
     return (req, res, next) => {
         handler(req, res, next)
         .catch(err => {
-            console.error(err);
             if (err instanceof httpErrors.HttpError) {
                 next(err);
             } else {
-                next(new httpErrors.InternalServerError());
+                next(new httpErrors.InternalServerError(err));
             }
         });
     };

@@ -23,7 +23,7 @@ module.exports = (config, logger, cacheManager) => {
             logger.log('Cache hit');
             res.send(cache);
         } catch (err) {
-            if (err.message != 'CacheNotExists') {
+            if (err.message !== 'CacheNotExists') {
                 throw err;
             }
 
@@ -49,12 +49,12 @@ module.exports = (config, logger, cacheManager) => {
      *
      */
     app.post('/', toAsync(async (req, res, next) => {
-        const { description } = req.body;
-        if (!description) {
+        const data = req.body;
+        if (!data) {
             throw new httpErrors.BadRequest();
         }
 
-        const cache = cacheManager.createCache(description);
+        const cache = await cacheManager.createCache(data);
         res.send(cache);
     }));
 
@@ -65,19 +65,22 @@ module.exports = (config, logger, cacheManager) => {
      */
     app.put('/:key', toAsync(async (req, res, next) => {
         const { key } = req.params;
-        const { description } = req.body;
-        if (!key || !description) {
+        const data = req.body;
+        if (!key || !data || Object.keys(data).length === 0) {
             throw new httpErrors.BadRequest();
         }
 
         let cache;
         try {
-            cache = await getCacheByKey(key);
+            cache = await cacheManager.getCacheByKey(key);
         } catch (err) {
-            throw new httpErrors.NotFound();
+            if (err.message == 'CacheNotExists') {
+                throw new httpErrors.NotFound();
+            }
+            throw err;
         }
 
-        cache.description = description;
+        cache.data = data;
         await cache.save();
         res.sendStatus(200);
     }));
