@@ -13,6 +13,7 @@ logs
 results
 tmp
 npm-debug.log*
+.nyc_output/*
 
 # Optional npm cache directory
 .npm

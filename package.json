@@ -8,7 +8,7 @@
   "scripts": {
     "start": "nodemon ./src --ignore tests/ localhost 3000",
     "start:dev": "cross-env NODE_ENV=development npm run start",
-    "test": "cross-env NODE_ENV=test mocha --recursive tests/",
+    "test": "cross-env NODE_ENV=test nyc mocha --recursive tests/",
     "prettier": "prettier --single-quote --tab-width 4 --trailing-comma es5 --write src/**/*.js",
     "lint": "eslint src/**/*.js"
   },
@@ -31,6 +31,7 @@
     "express": "4.16.3",
     "mongoose": "5.0.12",
     "morgan": "1.9.0",
+    "nyc": "11.6.0",
     "uuid": "3.2.1"
   }
 }
