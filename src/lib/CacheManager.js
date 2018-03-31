@@ -13,7 +13,7 @@ class CacheManager {
             {
                 timestamps: {
                     createdAt: 'created_at',
-                }
+                },
             }
         );
     }
