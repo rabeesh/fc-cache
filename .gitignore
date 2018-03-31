@@ -13,13 +13,12 @@ logs
 results
 tmp
 npm-debug.log*
-.env
 
 # Optional npm cache directory
 .npm
 
 # API keys and secrets
-.env
+config/.env
 
 # Dependency directory
 node_modules

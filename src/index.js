@@ -12,7 +12,7 @@ const app = express();
 (async () => {
     let dbConn;
     try {
-        dbConn = await require('./lib/conMongo')(config);
+        dbConn = await require('./lib/connMongo')(config);
     } catch (err) {
         logger.error(`MongoDB connection error: ${err}`);
         throw err;
@@ -27,10 +27,10 @@ const app = express();
 
     // use api handlers
     const cacheManager = new CacheManager(dbConn);
-    app.use('/cache', require('./api/cache')(config, logger, cacheManager));
+    app.use('/cache', require('./api')(config, logger, cacheManager));
 
-    app.listen(3000, () => {
-        logger.log('App listening on port 3000')
+    app.listen(config.port, () => {
+        logger.log(`App listening on port ${config.port}`)
     });
 })().catch(err => {
     logger.error(err);

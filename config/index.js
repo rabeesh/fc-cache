@@ -7,7 +7,10 @@ const dotenv = require('dotenv');
 dotenv.config({path: path.join(__dirname , '.env')});
 
 module.exports = {
-    env: process.env.NODE_ENV,
-    expirationTime: process.env.EXPIRATION_TIME,
-    mongoUri: process.env.MONGO_URI
+    env: process.env.NODE_ENV || 'development',
+    port: process.env.PORT || 3000,
+    maximumCacheLimit: process.env.MAXIMUM_CACHE_LIMIT || 10,
+    // in minutes
+    expirationTime: process.env.EXPIRATION_TIME || 15,
+    mongoUri: process.env.MONGO_URI || 'mongodb://localhost:27017/fc-cache'
 }

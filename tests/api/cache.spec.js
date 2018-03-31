@@ -16,7 +16,7 @@ describe('api end points', () => {
     expect.addAssertion('to yield a response of', (expect, subject, value) => {
         return expect(express()
             .use(bodyParser.json())
-            .use(cacheHandlers(config, logger, cacheManager)),
+            .use(cacheHandlers(logger, cacheManager)),
             'to yield exchange', {
                 request: subject,
                 response: value
@@ -25,7 +25,6 @@ describe('api end points', () => {
     });
 
     const cacheManager= {};
-    const config = {};
     const logger = {};
     const cacheData = {
         key: '123',

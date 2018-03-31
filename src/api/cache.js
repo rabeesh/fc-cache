@@ -1,9 +1,8 @@
 const express = require('express');
 const httpErrors = require('http-errors')
-
 const toAsync = require('./../lib/toAsync');
 
-module.exports = (config, logger, cacheManager) => {
+module.exports = (logger, cacheManager) => {
     const app = express();
 
     /**
@@ -60,7 +59,7 @@ module.exports = (config, logger, cacheManager) => {
 
 
     /**
-     * Update data in the store
+     * Update data in the store for the provided key
      *
      */
     app.put('/:key', toAsync(async (req, res, next) => {
