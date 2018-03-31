@@ -1,10 +1,9 @@
 // wrap into express handler into async/await
-const httpErrors = require('http-errors')
+const httpErrors = require('http-errors');
 
-module.exports = (handler) => {
+module.exports = handler => {
     return (req, res, next) => {
-        handler(req, res, next)
-        .catch(err => {
+        handler(req, res, next).catch(err => {
             if (err instanceof httpErrors.HttpError) {
                 next(err);
             } else {

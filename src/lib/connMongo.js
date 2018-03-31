@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
  * @public
  */
 
-module.exports = async (config) => {
+module.exports = async config => {
     return await new Promise((resolve, reject) => {
         // Exit application on error
         mongoose.connection.on('error', reject);
@@ -22,7 +22,7 @@ module.exports = async (config) => {
         }
 
         mongoose.connect(config.mongoUri, {
-            keepAlive: 1
+            keepAlive: 1,
         });
     });
 };
