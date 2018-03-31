@@ -3,6 +3,10 @@ const httpErrors = require('http-errors');
 const toAsync = require('./../lib/toAsync');
 
 module.exports = (config, logger, cacheManager) => {
+
+    /**
+     * Common handler for limit cache entries and notify it
+     */
     const cleanByLimitHandler = toAsync(async (req, res, next) => {
         const toBeCleaned = await cacheManager.cleanMaximumLimit(config);
         if (toBeCleaned !== false) {
@@ -37,10 +41,13 @@ module.exports = (config, logger, cacheManager) => {
              * If cache count is more than MAXIMUM_CACHE_LIMIT
              * Then clean up data by
              *     cache.data  = null
-             * And clean up expire time is over than 2/3 of time
+             *     &&
+             *     clean up expire time is over than 2/3 of time
              *
              * If cache count is more than limit
              * We won't allow create request to add new cache
+             *
+             * eg: DELETE request never create data, so we can allow that
              */
             .get('/cache/:id', cleanByLimitHandler)
             .post('/cache', cleanByLimitHandler)

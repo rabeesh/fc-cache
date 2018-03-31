@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 /**
- * Connect to mongo db
+ * Connection handler of mongo database
  *
  * @returns {object} Mongoose connection
  * @public

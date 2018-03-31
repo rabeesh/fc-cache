@@ -9,6 +9,9 @@ const CacheManager = require('./lib/CacheManager');
 const logger = new Logger();
 const app = express();
 
+/**
+ * Load express common middle ware and database
+ */
 (async () => {
     let dbConn;
     try {

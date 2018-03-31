@@ -1,4 +1,4 @@
-// Logger common handler
+// Common logging handler
 // It can be integrated with any logger library
 class Logger {
     /*eslint no-console: off */

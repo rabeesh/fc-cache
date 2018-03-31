@@ -2,6 +2,12 @@
 const mongoose = require('mongoose');
 const uuidv4 = require('uuid/v4');
 
+/**
+ * Cache manager
+ *
+ * Manages all cache related actionbn
+ * (Create/update/delete/fetch)
+ */
 class CacheManager {
     constructor(dbConn) {
         this.dbConn = dbConn;
