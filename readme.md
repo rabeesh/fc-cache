@@ -15,6 +15,14 @@ Run yarn to intsall all dependencies
 yarn install
 ```
 
+## Run the application
+
+Run application with nodemon
+
+```
+yarn run start:dev
+```
+
 ## Run tests
 
 Tests are run with `mocha`,  `unexpected.js` uses for assertion.
